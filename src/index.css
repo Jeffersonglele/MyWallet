@@ -2,6 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+/* IMPORT CORRIGÉ de la police Orbitron */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,7 +28,7 @@ body {
 .orbitron-font {
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700; /* ou le poids que vous préférez entre 400 et 900 */
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -116,7 +119,7 @@ body::-webkit-scrollbar {
   outline-offset: 2px;
 }
 
-/* Skip link for accessibility */
+/* Skip link for accessibility - ÉLIMINATION DES DOUBLONS */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -127,47 +130,259 @@ body::-webkit-scrollbar {
   text-decoration: none;
   border-radius: 4px;
   z-index: 1000;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .skip-link:focus {
   top: 6px;
-}
-
-/* Ensure skip link is visible when focused */
-.skip-link:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-/* Ensure skip link is visible when focused */
-.skip-link:focus {
-  top: 6px;
-}
-
-/* Ensure skip link is visible when focused */
-.skip-link:focus-visible {
-  top: 6px;
-}
-
-/* Prevent skip link from being clipped */
-.skip-link {
-  position: absolute !important;
-  top: -40px !important;
-  left: 6px !important;
-  z-index: 1000 !important;
-  transition: top 0.2s ease;
-  background: #1f2937;
-  color: white;
-  padding: 8px;
+/* ===== BOUTONS EN BLANC AMÉLIORÉS ===== */
+.learn-more {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
   text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  -moz-backdrop-filter: blur(4px);
-  -ms-backdrop-filter: blur(4px);
-  -o-backdrop-filter: blur(4px);
+  background: white;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.65, 0, 0.076, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+}
+
+.learn-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Cercle noir */
+.learn-more .circle {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2.5rem;
+  width: 2.5rem;
+  background: #000000;
+  border-radius: 50%;
+  transition: all 0.5s cubic-bezier(0.65, 0, 0.076, 1);
+  z-index: 1;
+}
+
+/* Flèche */
+.learn-more .icon.arrow {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.125rem;
+  height: 0.125rem;
+  background: transparent;
+  transition: all 0.5s cubic-bezier(0.65, 0, 0.076, 1);
+  z-index: 2;
+}
+
+.learn-more .icon.arrow::before {
+  content: '';
+  position: absolute;
+  top: -0.25rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+/* Texte du bouton */
+.learn-more .button-text {
+  position: relative;
+  color: #000000;
+  padding-left: 3.5rem;
+  padding-right: 1.5rem;
+  transition: all 0.5s cubic-bezier(0.65, 0, 0.076, 1);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* États au survol */
+.learn-more:hover .circle {
+  width: 100%;
+  left: 0;
+  background: #F25435;
+}
+
+.learn-more:hover .icon.arrow {
+  background: white;
+  left: calc(100% - 2.5rem);
+  transform: translateY(-50%);
+}
+
+.learn-more:hover .button-text {
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 3.5rem;
+}
+
+/* Variantes de taille */
+/* Petits boutons (header) */
+.learn-more.small {
+  height: 2.75rem;
+  min-width: 8rem;
+  font-size: 0.75rem;
+}
+
+.learn-more.small .circle {
+  height: 2rem;
+  width: 2rem;
+  left: 0.375rem;
+}
+
+.learn-more.small .icon.arrow {
+  left: 1.125rem;
+}
+
+.learn-more.small .button-text {
+  padding-left: 3rem;
+  font-size: 0.75rem;
+}
+
+.learn-more.small:hover .icon.arrow {
+  left: calc(100% - 2rem);
+}
+
+/* Boutons moyens (CTA principal) */
+.learn-more.medium {
+  height: 3.5rem;
+  min-width: 12rem;
+  font-size: 0.875rem;
+}
+
+.learn-more.medium .circle {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.learn-more.medium .button-text {
+  padding-left: 3.5rem;
+  font-size: 0.875rem;
+}
+
+/* Grands boutons (CTA final) */
+.learn-more.large {
+  height: 4rem;
+  min-width: 16rem;
+  font-size: 1rem;
+}
+
+.learn-more.large .circle {
+  height: 3rem;
+  width: 3rem;
+}
+
+.learn-more.large .button-text {
+  padding-left: 4rem;
+  font-size: 1rem;
+}
+
+/* Style spécifique pour les boutons avec fond orange */
+.learn-more.orange-bg {
+  background: #F25435;
+}
+
+.learn-more.orange-bg .button-text {
+  color: white;
+}
+
+.learn-more.orange-bg:hover {
+  background: #d84315;
+}
+
+/* Effet de lueur */
+.learn-more::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #F25435, #ffffff, #F25435);
+  border-radius: 9999px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.learn-more:hover::after {
+  opacity: 0.5;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation pour l'icône */
+.learn-more:hover .icon.arrow::before {
+  transform: rotate(45deg) scale(1.1);
+}
+
+/* Transition pour le texte */
+.learn-more .button-text {
+  transition: all 0.5s cubic-bezier(0.65, 0, 0.076, 1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .learn-more.medium {
+    height: 3rem;
+    min-width: 10rem;
+    font-size: 0.75rem;
+  }
+  
+  .learn-more.large {
+    height: 3.5rem;
+    min-width: 14rem;
+    font-size: 0.875rem;
+  }
+  
+  .learn-more.small {
+    height: 2.5rem;
+    min-width: 7rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Correction pour l'animation */
+.learn-more .icon.arrow {
+  background: transparent;
+}
+
+.learn-more:hover .icon.arrow {
+  background: transparent;
+}
+
+/* Amélioration de la flèche au survol */
+.learn-more:hover .icon.arrow::before {
+  border-top-color: white;
+  border-right-color: white;
 }
